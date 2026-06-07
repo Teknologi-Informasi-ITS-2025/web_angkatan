@@ -1,9 +1,9 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
-type SupabaseClientRole = 'anonymous' | 'authenticated' | 'service-role'
+type SupabaseClientKeyType = 'publishable' | 'secret'
 
 type CreateSupabaseServerClientOptions = {
-  role?: SupabaseClientRole
+  keyType?: SupabaseClientKeyType
 }
 
 const getSupabaseUrl = () => {
@@ -16,31 +16,31 @@ const getSupabaseUrl = () => {
   return supabaseUrl
 }
 
-const getSupabaseKey = (role: SupabaseClientRole) => {
-  const anonKey = process.env.SUPABASE_ANON_KEY
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+const getSupabaseKey = (keyType: SupabaseClientKeyType) => {
+  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY
+  const secretKey = process.env.SUPABASE_SECRET_KEY
 
-  if (role === 'service-role') {
-    if (!serviceRoleKey) {
-      throw new Error('Missing SUPABASE_SERVICE_ROLE_KEY environment variable.')
+  if (keyType === 'secret') {
+    if (!secretKey) {
+      throw new Error('Missing SUPABASE_SECRET_KEY environment variable.')
     }
 
-    return serviceRoleKey
+    return secretKey
   }
 
-  if (!anonKey) {
-    throw new Error('Missing SUPABASE_ANON_KEY environment variable.')
+  if (!publishableKey) {
+    throw new Error('Missing SUPABASE_PUBLISHABLE_KEY environment variable.')
   }
 
-  return anonKey
+  return publishableKey
 }
 
 export const createSupabaseServerClient = (
   options: CreateSupabaseServerClientOptions = {}
 ): SupabaseClient => {
-  const role = options.role ?? 'anonymous'
+  const keyType = options.keyType ?? 'publishable'
 
-  return createClient(getSupabaseUrl(), getSupabaseKey(role), {
+  return createClient(getSupabaseUrl(), getSupabaseKey(keyType), {
     auth: {
       autoRefreshToken: false,
       persistSession: false,
@@ -49,11 +49,8 @@ export const createSupabaseServerClient = (
   })
 }
 
-export const createSupabaseServiceRoleClient = (): SupabaseClient =>
-  createSupabaseServerClient({ role: 'service-role' })
+export const createSupabaseSecretClient = (): SupabaseClient =>
+  createSupabaseServerClient({ keyType: 'secret' })
 
-export const createSupabaseAnonymousClient = (): SupabaseClient =>
-  createSupabaseServerClient({ role: 'anonymous' })
-
-export const createSupabaseAuthenticatedClient = (): SupabaseClient =>
-  createSupabaseServerClient({ role: 'authenticated' })
+export const createSupabasePublishableClient = (): SupabaseClient =>
+  createSupabaseServerClient({ keyType: 'publishable' })

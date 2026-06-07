@@ -43,6 +43,65 @@ body {
   color: var(--foreground);
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.scroll-reveal {
+  --scroll-reveal-duration: 700ms;
+  --scroll-reveal-delay: 0ms;
+  --scroll-reveal-distance: 28px;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.scroll-reveal-ready {
+  opacity: 0;
+  transition:
+    opacity var(--scroll-reveal-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--scroll-reveal-delay),
+    transform var(--scroll-reveal-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--scroll-reveal-delay);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-up.scroll-reveal-ready {
+  transform: translate3d(0, var(--scroll-reveal-distance), 0) scale(0.98);
+}
+
+.scroll-reveal-down.scroll-reveal-ready {
+  transform: translate3d(0, calc(var(--scroll-reveal-distance) * -1), 0) scale(0.98);
+}
+
+.scroll-reveal-left.scroll-reveal-ready {
+  transform: translate3d(calc(var(--scroll-reveal-distance) * -1), 0, 0) scale(0.98);
+}
+
+.scroll-reveal-right.scroll-reveal-ready {
+  transform: translate3d(var(--scroll-reveal-distance), 0, 0) scale(0.98);
+}
+
+.scroll-reveal-none.scroll-reveal-ready {
+  transform: scale(0.98);
+}
+
+.scroll-reveal-visible.scroll-reveal-ready {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .scroll-reveal-ready,
+  .scroll-reveal-visible.scroll-reveal-ready {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
+
 @keyframes member-popup-show {
   from {
     opacity: 0;

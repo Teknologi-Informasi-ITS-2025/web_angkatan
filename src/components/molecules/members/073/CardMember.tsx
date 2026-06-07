@@ -10,7 +10,7 @@ import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
 import DiscordEffect from '@/assets/images/members/discord-effect.svg'
 
 import MemberPopup from './MemberPopup'
-import ProfileImage from './image.png'
+import ProfileImage from './image.jpeg'
 
 const CardMember = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -40,9 +40,9 @@ const CardMember = () => {
           <div className="flex flex-col gap-3">
             <div className="flex gap-2 px-1" onClick={(event) => event.stopPropagation()}>
               {/* UBAH USERNAME INSTAGRAM KAMU */}
-              <Instagram username="jkt48.erine" />
+              <Instagram username="nabilanafisa__" />
               {/* UBAH USERNAME LINKEDIN KAMU */}
-              <LinkedInButtonLink username="jkt48.erine" />
+              <LinkedInButtonLink username="Nabila Nafisatus Zuhro" />
             </div>
             <div className="w-full rounded-2xl">
               <Image
@@ -55,11 +55,11 @@ const CardMember = () => {
           {/*  JANGAN PERNAH UBAH STRUKTUR CARD MEMBER KARENA KODE INI AKAN DI-CRAWL OLEH SCRIPT UNTUK MENGAMBIL DATA MEMBER, UBAH DATA MEMBER YANG DIPERLUKAN SAJA. JANGAN JUGA UBAH STYLE CARD MEMBER KARENA STYLE YANG SAMA DIBUTUHKAN AGAR TAMPILAN WEBSITE KONSISTEN */}
           <div className="bg-blue-cs-40 rounded-2xl border-2 border-neutral-50 px-3 py-4 text-sm font-extrabold text-neutral-100">
             {/* UBAH NAMA KAMU */}
-            <p>Catherina Vallencia K</p>
+            <p>Nabila Nafisatus Zuhro</p>
             {/* UBAH NRP KAMU */}
-            <p>5027251082</p>
+            <p>5027251073</p>
             {/* UBAH ASAL KOTA KAMU */}
-            <p>Surakarta</p>
+            <p>Nganjuk</p>
           </div>
         </div>
       </div>

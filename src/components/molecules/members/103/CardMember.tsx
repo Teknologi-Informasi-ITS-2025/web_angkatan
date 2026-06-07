@@ -40,7 +40,7 @@ const CardMember = () => {
           <div className="flex flex-col gap-3">
             <div className="flex gap-2 px-1" onClick={(event) => event.stopPropagation()}>
               {/* UBAH USERNAME INSTAGRAM KAMU */}
-              <Instagram username="jkt48.erine" />
+              <Instagram username="wyog._a" />
               {/* UBAH USERNAME LINKEDIN KAMU */}
               <LinkedInButtonLink username="jkt48.erine" />
             </div>
@@ -55,11 +55,11 @@ const CardMember = () => {
           {/*  JANGAN PERNAH UBAH STRUKTUR CARD MEMBER KARENA KODE INI AKAN DI-CRAWL OLEH SCRIPT UNTUK MENGAMBIL DATA MEMBER, UBAH DATA MEMBER YANG DIPERLUKAN SAJA. JANGAN JUGA UBAH STYLE CARD MEMBER KARENA STYLE YANG SAMA DIBUTUHKAN AGAR TAMPILAN WEBSITE KONSISTEN */}
           <div className="bg-blue-cs-40 rounded-2xl border-2 border-neutral-50 px-3 py-4 text-sm font-extrabold text-neutral-100">
             {/* UBAH NAMA KAMU */}
-            <p>Catherina Vallencia K</p>
+            <p>Wahyu Yoga Wicaksono</p>
             {/* UBAH NRP KAMU */}
-            <p>5027251082</p>
+            <p>5027251103</p>
             {/* UBAH ASAL KOTA KAMU */}
-            <p>Surakarta</p>
+            <p>Yogyakarta</p>
           </div>
         </div>
       </div>

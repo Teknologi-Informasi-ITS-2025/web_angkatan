@@ -6,7 +6,7 @@ type SpotifyEmbedProps = {
 }
 
 const getSpotifyTrackEmbedUrl = (spotifyUrl: string) => {
-  const trackMatch = spotifyUrl.match(/open\.spotify\.com\/(?:embed\/)?track\/([^?/#]+)/)
+  const trackMatch = spotifyUrl.match(/open\.spotify\.com\/(?:(?:intl-[a-z]{2}\/)?|embed\/)track\/([^?/#]+)/i)
   const trackId = trackMatch?.[1]
 
   if (!trackId) {

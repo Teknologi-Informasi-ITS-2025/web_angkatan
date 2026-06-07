@@ -4,7 +4,7 @@ import { ZodError } from 'zod'
 
 import { getModerationBlockMessage, moderateMenfessPayload } from '@/lib/menfess/moderation'
 import { menfessPayloadSchema, normalizeMenfessPayload, type MenfessPayloadInput } from '@/lib/menfess/schema'
-import { createSupabaseAnonymousClient, createSupabaseServiceRoleClient } from '@/lib/supabase/server'
+import { createSupabasePublishableClient, createSupabaseSecretClient } from '@/lib/supabase/server'
 import type { ActionResult, MenfessListData, MenfessRecord } from '@/types/menfess'
 import type { MenfessReactionName } from '@/types/menfess'
 import { revalidatePath } from 'next/cache'
@@ -67,7 +67,7 @@ export async function createMenfessAction(
       }
     }
 
-    const supabase = createSupabaseAnonymousClient()
+    const supabase = createSupabasePublishableClient()
 
     const { data, error } = await supabase
       .from('menfess')
@@ -127,7 +127,7 @@ export async function getMenfessListAction(
     const limit = sanitizeLimit(params.limit)
     const from = (page - 1) * limit
     const to = from + limit - 1
-    const supabase = createSupabaseAnonymousClient()
+    const supabase = createSupabasePublishableClient()
 
     const { data, error, count } = await supabase
       .from('menfess')
@@ -169,7 +169,7 @@ export async function updateMenfessReactionAction(
   params: UpdateMenfessReactionActionParams
 ): Promise<ActionResult<MenfessRecord>> {
   try {
-    const supabase = createSupabaseServiceRoleClient()
+    const supabase = createSupabaseSecretClient()
 
     const { data: current, error: fetchError } = await supabase
       .from('menfess')

@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import type { StaticImageData } from 'next/image'
 
+import ScrollReveal from '@/components/atoms/animation/ScrollReveal'
+
 import { getTextStrokeStyle } from '@/lib/textStroke'
 
 import Ara7 from '@/assets/images/homepage/moments/ara7.jpg'
@@ -85,56 +87,67 @@ const Moments = () => {
   return (
     <section className="bg-blue-cs-40 min-h-screen w-full overflow-x-clip">
       <div className="blob !bg-yellow-cs-30 relative left-1/2 flex min-h-screen w-[116%] -translate-x-1/2 flex-col items-center overflow-hidden rounded-t-[12rem] shadow-[inset_0px_10px_4px_7px_#00000059] sm:w-[108%] sm:rounded-t-[25rem] lg:left-0 lg:w-full lg:translate-x-0">
-        <h2
-          className="font-rubikone text-blue-cs-30 pt-16 text-center text-[32px] leading-[40px] sm:text-[40px] sm:leading-[52px] lg:text-[56px] lg:leading-[70px]"
-          style={getTextStrokeStyle({ color: '#ffffff', width: 2 })}
-        >
-          Our Moments
-        </h2>
+        <ScrollReveal direction="down" distance={18}>
+          <h2
+            className="font-rubikone text-blue-cs-30 pt-16 text-center text-[32px] leading-[40px] sm:text-[40px] sm:leading-[52px] lg:text-[56px] lg:leading-[70px]"
+            style={getTextStrokeStyle({ color: '#ffffff', width: 2 })}
+          >
+            Our Moments
+          </h2>
+        </ScrollReveal>
 
-        <div className="block w-full px-4 py-8 lg:hidden">
+        <div className="block w-[min(100vw,1040px)] px-4 py-8 lg:hidden">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {momentPhotos.map((photo) => (
-              <button
-                key={photo.id}
-                type="button"
-                onClick={() => setActivePhoto(photo)}
-                className="mx-auto w-5/6 cursor-pointer border-[8px] border-white shadow-xl transition-transform hover:scale-[1.01] focus:outline-none"
-                aria-label={`Open photo: ${photo.alt}`}
-              >
-                <div className="relative aspect-video w-full overflow-hidden">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 767px) 80vw, 45vw"
-                  />
-                </div>
-              </button>
+            {momentPhotos.map((photo, index) => (
+              <ScrollReveal key={photo.id} delay={index * 70} distance={30}>
+                <button
+                  type="button"
+                  onClick={() => setActivePhoto(photo)}
+                  className="mx-auto block w-full max-w-[520px] cursor-pointer border-[8px] border-white shadow-xl transition-transform hover:scale-[1.01] focus:outline-none md:w-5/6"
+                  aria-label={`Open photo: ${photo.alt}`}
+                >
+                  <div className="relative aspect-video w-full overflow-hidden">
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 767px) 80vw, 45vw"
+                    />
+                  </div>
+                </button>
+              </ScrollReveal>
             ))}
           </div>
         </div>
 
         <div className="relative hidden h-[900px] w-full max-w-[1440px] overflow-hidden lg:block">
-          {momentPhotos.map((photo) => (
-            <button
-              key={photo.id}
-              type="button"
-              onClick={() => setActivePhoto(photo)}
-              className={`absolute aspect-video cursor-pointer border-[14px] border-white object-cover transition-transform hover:scale-[1.01] focus:outline-none ${photo.desktopClassName}`}
-              aria-label={`Open photo: ${photo.alt}`}
-            >
-              <div className="relative h-full w-full overflow-hidden">
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 520px"
-                />
-              </div>
-            </button>
+          {momentPhotos.map((photo, index) => (
+            <div key={photo.id} className={`absolute aspect-video ${photo.desktopClassName}`}>
+              <ScrollReveal
+                className="h-full w-full"
+                delay={index * 90}
+                direction={index % 2 === 0 ? 'left' : 'right'}
+                distance={38}
+              >
+                <button
+                  type="button"
+                  onClick={() => setActivePhoto(photo)}
+                  className="h-full w-full cursor-pointer border-[14px] border-white object-cover transition-transform hover:scale-[1.01] focus:outline-none"
+                  aria-label={`Open photo: ${photo.alt}`}
+                >
+                  <div className="relative h-full w-full overflow-hidden">
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 520px"
+                    />
+                  </div>
+                </button>
+              </ScrollReveal>
+            </div>
           ))}
         </div>
       </div>

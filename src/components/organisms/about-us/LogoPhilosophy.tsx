@@ -19,7 +19,7 @@ const philosophyData = [
     description: (
       <>
         Perlambangan dari <span className="text-yellow-cs-30">Astra</span>, sebagai bentuk dari{' '}
-        <span className="text-yellow-cs-30">harapan</span> dan <span className="text-yellow-cs-30">tujuan</span>, serta
+harapan dan <span className="text-yellow-cs-30">tujuan</span>, serta
         cita-cita bersama yang ingin kami capai.
       </>
     )
@@ -54,7 +54,7 @@ const philosophyData = [
     image: LogoArusKeBawah,
     description: (
       <>
-        menyimbolkan <span className="text-yellow-cs-30">kepedulian</span> dan{' '}
+        Bentuk menyerupai tangan yang merangkul menyimbolkan <span className="text-yellow-cs-30">kepedulian</span> dan{' '}
         <span className="text-yellow-cs-30">saling merangkul</span> untuk menciptakan lingkungan yang{' '}
         <span className="text-yellow-cs-30">inklusif</span>
       </>
@@ -89,10 +89,9 @@ const philosophyData = [
     description: (
       <>
         Melambangkan <span className="text-yellow-cs-30">keberagaman individu</span> yang{' '}
-        <span className="text-yellow-cs-30">saling melengkapi</span> dalam satu{' '}
-        <span className="text-yellow-cs-30">tujuan</span> bersama melalui proses perkembangan yang berjalan secara{' '}
-        <span className="text-yellow-cs-30">bertahap</span>, dari mengenal diri, belajar bersama, hingga mencapai{' '}
-        <span className="text-yellow-cs-30">potensi terbaik</span>
+        <span className="text-yellow-cs-30">saling melengkapi</span> dalam satu tujuan bersama melalui proses
+        perkembangan yang berjalan secara <span className="text-yellow-cs-30">bertahap</span>, dari mengenal diri,
+        belajar bersama, hingga mencapai <span className="text-yellow-cs-30">potensi terbaik</span>
       </>
     )
   }

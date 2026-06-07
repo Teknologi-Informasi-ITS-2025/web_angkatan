@@ -124,7 +124,7 @@ const Hero = ({ filters }: HeroProps) => {
   return (
     <section
       id="hero"
-      className="bg-blue-cs-40 text-neutral-cs-10 relative flex w-full items-center justify-center overflow-hidden py-36 md:py-16"
+      className="bg-blue-cs-40 text-neutral-cs-10 pointer-events-none relative flex w-full items-center justify-center py-36 md:py-16"
     >
       {/* 1. LAYER VIDEO: Tanpa z-index (Otomatis paling bawah) */}
       <video
@@ -142,8 +142,8 @@ const Hero = ({ filters }: HeroProps) => {
       {/* 2. LAYER OVERLAY: Tanpa z-index (Otomatis di atas video berdasarkan DOM) */}
       <div className="from-blue-cs-30/20 to-blue-cs-40 absolute inset-0 bg-gradient-to-b" aria-hidden="true" />
 
-      {/* 3. LAYER KONTEN: Cukup z-10 agar di atas background, sangat aman untuk Navbar */}
-      <div className="relative z-10 flex min-h-[640px] w-full max-w-[1260px] flex-col items-center gap-10 px-6 py-24 text-center sm:px-10 lg:min-h-[916px] lg:gap-[52px] lg:px-[90px] lg:py-[136px]">
+      {/* 3. LAYER KONTEN: Di atas member list overlap, tetap di bawah navbar fixed. */}
+      <div className="relative z-30 flex min-h-[640px] w-full max-w-[1260px] flex-col items-center gap-10 px-6 py-24 text-center sm:px-10 lg:min-h-[916px] lg:gap-[52px] lg:px-[90px] lg:py-[136px]">
         <div>
           <h1
             style={getTextStrokeStyle({ color: '#fff', width: getStrokeWidth() })}
@@ -166,7 +166,7 @@ const Hero = ({ filters }: HeroProps) => {
 
         <form
           onSubmit={(event) => event.preventDefault()}
-          className="grid w-full max-w-[920px] grid-cols-1 gap-5 text-left sm:grid-cols-2 lg:grid-cols-[320px_320px_240px]"
+          className="pointer-events-auto grid w-full max-w-[920px] grid-cols-1 gap-5 text-left sm:grid-cols-2 lg:grid-cols-[320px_320px_240px]"
         >
           <label className="flex flex-col gap-2">
             <span className="text-neutral-cs-10/70 text-sm leading-5 font-bold tracking-wide uppercase">Search</span>
@@ -210,7 +210,7 @@ const Hero = ({ filters }: HeroProps) => {
             </button>
 
             {isSortOpen ? (
-              <div className="border-neutral-cs-10 absolute top-[82px] right-0 left-0 z-20 overflow-hidden rounded-b-[12px] border-2 border-t-0 bg-[#071c35] lg:rounded-br-[12px] lg:rounded-bl-none">
+              <div className="border-neutral-cs-10 absolute top-[82px] right-0 left-0 z-100 overflow-hidden rounded-b-[12px] border-2 border-t-0 bg-[#071c35] lg:rounded-br-[12px] lg:rounded-bl-none">
                 {sortOptions.map((option) => (
                   <button
                     key={option.value}

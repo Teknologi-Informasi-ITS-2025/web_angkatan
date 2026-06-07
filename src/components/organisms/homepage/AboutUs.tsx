@@ -1,12 +1,14 @@
 import Image from 'next/image'
 
+import ScrollReveal from '@/components/atoms/animation/ScrollReveal'
+
 import { getTextStrokeStyle } from '@/lib/textStroke'
 
 import cloudIcon from '@/assets/images/icon/cloud-2.svg'
 
 const AboutUs = () => {
   return (
-    <section id="about-us" className="bg-blue-cs-40 text-neutral-cs-10 w-full">
+    <section id="about-us" className="bg-blue-cs-40 text-neutral-cs-10 w-full overflow-x-clip">
       <div className="mx-auto flex w-full max-w-[1260px] flex-col items-center gap-8 px-6 py-16 text-center sm:px-10 lg:px-[90px] lg:py-[110px]">
         <div className="relative flex min-h-[104px] w-full items-start justify-center overflow-hidden pt-2 sm:min-h-0 sm:items-center sm:overflow-visible sm:pt-0">
           <Image
@@ -15,12 +17,14 @@ const AboutUs = () => {
             aria-hidden="true"
             className="pointer-events-none absolute top-[42px] right-[calc(50%+28px)] z-0 h-auto w-[38vw] max-w-[172px] min-w-[112px] scale-x-[-1] -rotate-12 sm:hidden"
           />
-          <h2
-            className="font-rubikone text-blue-cs-30 relative z-10 text-[32px] leading-[40px] sm:text-[40px] sm:leading-[52px] lg:text-[56px] lg:leading-[70px]"
-            style={getTextStrokeStyle({ color: '#ffffff', width: 2 })}
-          >
-            About Us
-          </h2>
+          <ScrollReveal direction="down" distance={18}>
+            <h2
+              className="font-rubikone text-blue-cs-30 relative z-10 text-[32px] leading-[40px] sm:text-[40px] sm:leading-[52px] lg:text-[56px] lg:leading-[70px]"
+              style={getTextStrokeStyle({ color: '#ffffff', width: 2 })}
+            >
+              About Us
+            </h2>
+          </ScrollReveal>
           <Image
             src={cloudIcon}
             alt=""
@@ -29,7 +33,7 @@ const AboutUs = () => {
           />
         </div>
 
-        <div className="relative w-full max-w-[1040px] overflow-visible">
+        <ScrollReveal className="relative w-full max-w-[1040px] overflow-visible" delay={120} distance={34}>
           <Image
             src={cloudIcon}
             alt=""
@@ -67,7 +71,7 @@ const AboutUs = () => {
               </span>
             </p>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   )

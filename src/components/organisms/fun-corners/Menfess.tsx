@@ -83,36 +83,43 @@ const getPaginationItems = (
   totalPages: number
 ) => {
   const pages: (number | string)[] = []
-  if (totalPages <= 5) {
+
+  if (totalPages <= 7) {
     return Array.from(
       { length: totalPages },
       (_, i) => i + 1
     )
   }
-  if (currentPage <= 3) {
-    pages.push(1, 2, 3, '...', totalPages)
-    return pages
-  }
-  if (currentPage >= totalPages - 2) {
-    pages.push(
-      1,
-      '...',
-      totalPages - 2,
-      totalPages - 1,
-      totalPages
-    )
 
-    return pages
+  pages.push(1)
+
+  let startPage = Math.max(2, currentPage - 1)
+  let endPage = Math.min(totalPages - 1, currentPage + 1)
+
+  if (currentPage <= 4) {
+    startPage = 2
+    endPage = 5
   }
-  pages.push(
-    1,
-    '...',
-    currentPage - 1,
-    currentPage,
-    currentPage + 1,
-    '...',
-    totalPages
-  )
+
+  if (currentPage >= totalPages - 3) {
+    startPage = totalPages - 4
+    endPage = totalPages - 1
+  }
+
+  if (startPage > 2) {
+    pages.push('...')
+  }
+
+  for (let page = startPage; page <= endPage; page += 1) {
+    pages.push(page)
+  }
+
+  if (endPage < totalPages - 1) {
+    pages.push('...')
+  }
+
+  pages.push(totalPages)
+
   return pages
 }
 
@@ -332,13 +339,18 @@ const Menfess = ({ initialPage = 1 }: MenfessProps) => {
 
         {/* Pagination */}
         {!loading && totalPages > 1 && (
-          <div className="mt-4 flex items-center justify-center gap-2 text-white">
+          <nav
+            className="mt-4 flex flex-wrap items-center justify-center gap-2 text-white"
+            aria-label="Menfess pagination"
+          >
             {/* Prev */}
             <button
+              type="button"
               disabled={currentPage === 1}
               onClick={() =>
                 goToPage(currentPage - 1)
               }
+              aria-label="Go to previous page"
               className={`
                 flex h-8 w-8 items-center justify-center rounded transition
                 ${
@@ -359,7 +371,8 @@ const Menfess = ({ initialPage = 1 }: MenfessProps) => {
                 return (
                   <span
                     key={`dots-${index}`}
-                    className="px-1"
+                    className="flex h-8 min-w-6 items-center justify-center px-1 text-white/70"
+                    aria-hidden="true"
                   >
                     ...
                   </span>
@@ -368,10 +381,13 @@ const Menfess = ({ initialPage = 1 }: MenfessProps) => {
 
               return (
                 <button
+                  type="button"
                   key={item}
                   onClick={() =>
                     goToPage(item as number)
                   }
+                  aria-current={currentPage === item ? 'page' : undefined}
+                  aria-label={`Go to page ${item}`}
                   className={`
                     flex h-8 w-8 items-center justify-center rounded transition
                     ${
@@ -388,10 +404,12 @@ const Menfess = ({ initialPage = 1 }: MenfessProps) => {
 
             {/* Next */}
             <button
+              type="button"
               disabled={currentPage === totalPages}
               onClick={() =>
                 goToPage(currentPage + 1)
               }
+              aria-label="Go to next page"
               className={`
                 flex h-8 w-8 items-center justify-center rounded transition
                 ${
@@ -403,7 +421,7 @@ const Menfess = ({ initialPage = 1 }: MenfessProps) => {
             >
               &gt;
             </button>
-          </div>
+          </nav>
         )}
       </div>
     </section>
