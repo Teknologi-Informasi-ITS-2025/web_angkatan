@@ -100,7 +100,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             <p className="text-stone-400/80 text-xs tracking-wide uppercase font-bold flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#fca5a5]"></span> Fun Fact
             </p>
-            <p className="mt-2 text-stone-100 font-medium">suka dengerin cerita tapi besoknya bakal lupa</p>
+            <p className="mt-2 text-stone-100 font-medium">suka dengerin cerita tapi besoknya bakal lupa :D</p>
           </div>
         </div>
 
