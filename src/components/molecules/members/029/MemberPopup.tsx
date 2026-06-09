@@ -228,7 +228,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             <div className="px-5 pt-5 pb-2">
               {/* UBAH NAMA ANDA */}
               <h2 className="text-xl font-black leading-tight" style={{ color: '#f1f5f9' }}>
-                Muhammad Rifqi Fathurrahman K
+                Muhammad Rifqi Fathurrahman
               </h2>
               {/* UBAH NRP DAN ASAL */}
               <p className="mt-1 text-sm font-semibold" style={{ color: '#475569' }}>
