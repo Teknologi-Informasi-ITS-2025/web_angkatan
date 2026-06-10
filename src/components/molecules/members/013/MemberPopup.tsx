@@ -239,7 +239,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   const currentChapter = chapterIndex === -1 ? secretChapter : fairyChapters[chapterIndex]
 
   return createPortal(
-    <div className="fixed inset-0 z-[100] overflow-y-auto px-4 py-[5dvh]">
+    <div className="popup-overlay fixed inset-0 z-[100] overflow-y-auto px-4 py-[5dvh]">
       <button
         type="button"
         aria-label="Close member detail"
@@ -593,6 +593,15 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           box-sizing: border-box;
         }
 
+        .popup-overlay {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .popup-overlay::-webkit-scrollbar {
+          display: none;
+        }
+
         .member-popup-shell {
           position: relative;
           z-index: 10;
@@ -935,6 +944,12 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           backdrop-filter: blur(12px);
           overflow-y: auto;
           animation: cardPop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .card::-webkit-scrollbar {
+          display: none;
         }
 
         @keyframes cardPop {
