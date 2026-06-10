@@ -2,12 +2,13 @@ import type { Metadata, Viewport } from 'next'
 import { Cinzel, Montserrat } from 'next/font/google'
 import localFont from 'next/font/local'
 
+import { Analytics } from '@vercel/analytics/next'
+import { Toaster } from 'sonner'
+
 import { defineMetadata } from '@/lib/metadata'
 
 import Footer from '@/components/organisms/layout/Footer'
 import Navbar from '@/components/organisms/layout/Navbar'
-
-import { Toaster } from 'sonner'
 
 import './globals.css'
 
@@ -70,8 +71,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${cinzel.variable} ${rubikone.variable} ${simplicity.variable} ${blackGoth.variable} 
-      ${cloisterBlack.variable} ${Bodo.variable} ${ringerLuctor.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${montserrat.variable} ${cinzel.variable} ${rubikone.variable} ${simplicity.variable} ${blackGoth.variable} ${cloisterBlack.variable} ${Bodo.variable} ${ringerLuctor.variable} h-full antialiased`}
+    >
       <head>
         <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon.svg" />
@@ -85,12 +88,9 @@ export default function RootLayout({
         {children}
         <Footer />
 
-        <Toaster
-          position="top-center"
-          richColors
-          closeButton
-          duration={5000}
-        />
+        <Toaster position="top-center" richColors closeButton duration={5000} />
+
+        <Analytics />
       </body>
     </html>
   )
