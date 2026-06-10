@@ -432,14 +432,14 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
                 <input
                   className="q-input"
                   value={answer}
-                  placeholder="type her name..."
+                  placeholder="Who is the princess?"
                   onChange={(e) => setAnswer(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') checkAnswer()
                   }}
                 />
                 <button className="btn-kirim" onClick={checkAnswer}>
-                  Kirim
+                  Unlock the Gate 👑
                 </button>
               </div>
 
@@ -457,9 +457,9 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
                   </div>
                 </div>
                 <div className="wrong-msg-only">
-                  🌙 The magic didn&apos;t work...
+                  🌙 The magic didn&apos;t work
                   <br />
-                  Perhaps that&apos;s not the princess we&apos;re looking for.
+                  The stars don&apos;t recognize that princess
                 </div>
                 <button className="btn-wrong-close" onClick={closeWrong}>
                   ✕
