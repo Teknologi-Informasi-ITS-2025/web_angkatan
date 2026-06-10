@@ -105,7 +105,7 @@ const Mission = () => {
         <div className="relative w-full max-w-[1200px]">
           <Image src={Frame} alt="Frame" className="hidden h-auto w-full sm:block" priority />
 
-          <div className="min-h-[260px] rounded-2xl border-2 border-white/70 bg-[#0D294F]/80 px-12 py-10 shadow-[0_16px_40px_rgba(0,0,0,0.24)] sm:absolute sm:inset-0 sm:flex sm:min-h-0 sm:flex-col sm:items-center sm:justify-center sm:rounded-none sm:border-0 sm:bg-transparent sm:px-16 sm:py-0 sm:shadow-none md:px-24">
+          <div className="flex min-h-[260px] flex-col items-center justify-center rounded-2xl border-2 border-white/70 bg-[#0D294F]/80 px-14 py-10 shadow-[0_16px_40px_rgba(0,0,0,0.24)] sm:absolute sm:inset-0 sm:min-h-0 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-16 sm:py-0 sm:shadow-none md:px-24">
             <p className="animate-in fade-in mx-auto max-w-3xl text-center text-sm leading-7 font-semibold text-white transition-all duration-300 sm:text-base md:text-lg md:leading-relaxed">
               {currentMission.content}
             </p>

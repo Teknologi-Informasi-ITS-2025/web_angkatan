@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import Image from 'next/image'
 import { createPortal } from 'react-dom'
@@ -18,11 +18,89 @@ type MemberPopupProps = {
 
 type StyleVars = React.CSSProperties & Record<`--${string}`, string | number>
 
+const fairyChapters = [
+  {
+    title: '📖 Chapter 1 — The Goodbye',
+    text: `Once upon a time,
+a princess held on too tightly
+to a story that had already ended.`
+  },
+  {
+    title: '📖 Chapter 2 — The Empty Castle',
+    text: `The castle felt quieter than before.
+She wondered if some rooms
+would stay empty forever.`
+  },
+  {
+    title: '📖 Chapter 3 — The Rain',
+    text: `Some days felt like endless rain.
+The princess thought
+the storm would never leave.`
+  },
+  {
+    title: '📖 Chapter 4 — Learning',
+    text: `Little by little,
+she learned that letting go
+isn't the same as losing.`
+  },
+  {
+    title: '📖 Chapter 5 — The Butterflies',
+    text: `She stopped chasing butterflies.
+And somehow,
+they returned on their own.`
+  },
+  {
+    title: '📖 Chapter 6 — The Moonlight',
+    text: `On lonely nights,
+the moon reminded her
+that even darkness can be beautiful.`
+  },
+  {
+    title: '📖 Chapter 7 — New Pages',
+    text: `Some endings, she discovered,
+are simply new chapters
+waiting to begin.`
+  },
+  {
+    title: '📖 Chapter 8 — Blooming',
+    text: `While she was busy healing,
+the flowers around the castle
+quietly began to bloom.`
+  },
+  {
+    title: '📖 Chapter 9 — The Storm',
+    text: `One day,
+the princess looked around
+and realized the storm was gone.`
+  },
+  {
+    title: '📖 Chapter 10 — Happily Ever After',
+    text: `The castle felt warm again.
+Not because nothing had happened,
+but because she survived it.`
+  }
+]
+
+const secretChapter = {
+  title: '🔒 Secret Chapter',
+  text: `The princess never got back
+the chapter she lost.
+But she found something better, peace.
+👑✨`
+}
+
 const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   const [answer, setAnswer] = useState('')
   const [isWrong, setIsWrong] = useState(false)
-  const [step, setStep] = useState<'quiz' | 'quote' | 'card'>('quiz')
+  const [step, setStep] = useState<'quiz' | 'quote' | 'card' | 'fairy'>('quiz')
   const [isMusicMode, setIsMusicMode] = useState(false)
+  const [butterflyMessage, setButterflyMessage] = useState(false)
+  const [butterflyPos, setButterflyPos] = useState({ top: 26, left: 76 })
+  const [flowerTrail, setFlowerTrail] = useState<{ id: number; x: number; y: number; emoji: string }[]>([])
+  const [chapterIndex, setChapterIndex] = useState(0)
+  const [isPageFlipping, setIsPageFlipping] = useState(false)
+
+  const trailId = useRef(0)
 
   const magicalFloaters = [
     { e: '⭐', sz: 28 },
@@ -50,6 +128,12 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     setIsWrong(false)
     setStep('quiz')
     setIsMusicMode(false)
+    setButterflyMessage(false)
+    setButterflyPos({ top: 26, left: 76 })
+    setFlowerTrail([])
+    setChapterIndex(0)
+    setIsPageFlipping(false)
+    trailId.current = 0
   }, [])
 
   const handleClose = useCallback(() => {
@@ -73,6 +157,32 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     }
   }, [isOpen, handleClose])
 
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleMouseMove = (event: MouseEvent) => {
+      const emojis = ['🌸', '🌷', '💗', '✨', '🌺']
+      const newTrail = {
+        id: trailId.current++,
+        x: event.clientX,
+        y: event.clientY,
+        emoji: emojis[Math.floor(Math.random() * emojis.length)]
+      }
+
+      setFlowerTrail((prev) => [...prev.slice(-18), newTrail])
+
+      setTimeout(() => {
+        setFlowerTrail((prev) => prev.filter((item) => item.id !== newTrail.id))
+      }, 1000)
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [isOpen])
+
   if (!isOpen) return null
 
   const checkAnswer = () => {
@@ -92,8 +202,44 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     setAnswer('')
   }
 
+  const moveButterfly = () => {
+    setButterflyMessage(true)
+    setButterflyPos({
+      top: 12 + Math.random() * 68,
+      left: 8 + Math.random() * 82
+    })
+
+    setTimeout(() => {
+      setButterflyMessage(false)
+    }, 2200)
+  }
+
+  const turnFairyPage = () => {
+    if (isPageFlipping) return
+
+    setIsPageFlipping(true)
+
+    const audio = new Audio('/sounds/paper-flip.mp3')
+    audio.volume = 0.45
+    audio.play().catch(() => {})
+
+    setTimeout(() => {
+      if (chapterIndex === -1) {
+        setChapterIndex(0)
+      } else if (chapterIndex >= fairyChapters.length - 1) {
+        setChapterIndex(-1)
+      } else {
+        setChapterIndex((prev) => prev + 1)
+      }
+
+      setIsPageFlipping(false)
+    }, 430)
+  }
+
+  const currentChapter = chapterIndex === -1 ? secretChapter : fairyChapters[chapterIndex]
+
   return createPortal(
-    <div className="fixed inset-0 z-[100] overflow-y-auto px-4 py-[5dvh]">
+    <div className="popup-overlay fixed inset-0 z-[100] overflow-y-auto px-4 py-[5dvh]">
       <button
         type="button"
         aria-label="Close member detail"
@@ -206,6 +352,50 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         <div className="cloud-base cloud-4">
           <span>☁️</span>
         </div>
+      </div>
+
+      <button
+        type="button"
+        className="butterfly-companion"
+        style={{
+          top: `${butterflyPos.top}%`,
+          left: `${butterflyPos.left}%`
+        }}
+        onClick={moveButterfly}
+        title="Click the butterfly"
+      >
+        🦋
+      </button>
+
+      {butterflyMessage && (
+        <div
+          className="butterfly-message"
+          style={{
+            top: `${butterflyPos.top + 6}%`,
+            left: `${butterflyPos.left}%`
+          }}
+        >
+          <b>🦋 Butterfly Message</b>
+          <br />
+          Some people are meant to be a chapter,
+          <br />
+          not the whole story
+        </div>
+      )}
+
+      <div className="flower-trail-layer">
+        {flowerTrail.map((item) => (
+          <span
+            key={item.id}
+            className="flower-trail"
+            style={{
+              left: item.x,
+              top: item.y
+            }}
+          >
+            {item.emoji}
+          </span>
+        ))}
       </div>
 
       <div className="page">
@@ -361,6 +551,34 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
                 <div className="sp-song-name">Begin Again 🎶</div>
                 <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/05GsNucq8Bngd9fnd4fRa0?si=87e953ecc5f4492c" />
               </div>
+
+              <button type="button" className="fairy-open-btn" onClick={() => setStep('fairy')}>
+                Open Fairy Tale Page 📖
+              </button>
+            </div>
+          )}
+
+          {step === 'fairy' && (
+            <div className="slide fairy-slide">
+              <div className="fairy-title">Fairy Tale Page 📖</div>
+
+              <div className={`fairy-book ${isPageFlipping ? 'flipping' : ''}`} onClick={turnFairyPage}>
+                <div className="fairy-page">
+                  <div className="fairy-corner top-left">🦋</div>
+                  <div className="fairy-corner top-right">✨</div>
+                  <div className="fairy-corner bottom-left">🌸</div>
+                  <div className="fairy-corner bottom-right">👑</div>
+
+                  <div className="fairy-chapter-title">{currentChapter.title}</div>
+                  <pre className="fairy-text">{currentChapter.text}</pre>
+                </div>
+              </div>
+
+              <div className="fairy-hint">📖 Every princess keeps a story untold</div>
+
+              <button type="button" className="fairy-back-btn" onClick={() => setStep('card')}>
+                Back to Princess Card 👑
+              </button>
             </div>
           )}
         </div>
@@ -373,6 +591,15 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
+        }
+
+        .popup-overlay {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .popup-overlay::-webkit-scrollbar {
+          display: none;
         }
 
         .member-popup-shell {
@@ -594,6 +821,96 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           }
         }
 
+        .butterfly-companion {
+          position: fixed;
+          z-index: 12;
+          border: none;
+          background: transparent;
+          font-size: 38px;
+          cursor: pointer;
+          filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 18px rgba(255, 120, 220, 0.6));
+          animation: butterflyFly 4s ease-in-out infinite;
+          transition:
+            top 1s ease,
+            left 1s ease,
+            transform 0.2s ease;
+        }
+
+        .butterfly-companion:hover {
+          transform: scale(1.25) rotate(10deg);
+        }
+
+        @keyframes butterflyFly {
+          0%,
+          100% {
+            transform: translateY(0) rotate(-8deg);
+          }
+          50% {
+            transform: translateY(-18px) rotate(12deg);
+          }
+        }
+
+        .butterfly-message {
+          position: fixed;
+          z-index: 13;
+          transform: translateX(-50%);
+          background: rgba(255, 255, 255, 0.92);
+          border: 2px solid #ffb3d1;
+          border-radius: 18px;
+          padding: 12px 16px;
+          text-align: center;
+          color: #9b1461;
+          font-size: 13px;
+          font-weight: 800;
+          box-shadow:
+            0 8px 25px rgba(233, 30, 140, 0.28),
+            0 0 20px rgba(255, 255, 255, 0.6);
+          animation: butterflyNotePop 2.2s ease both;
+          pointer-events: none;
+        }
+
+        @keyframes butterflyNotePop {
+          0% {
+            opacity: 0;
+            transform: translateX(-50%) translateY(12px) scale(0.8);
+          }
+          15%,
+          80% {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0) scale(1);
+          }
+          100% {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-14px) scale(0.92);
+          }
+        }
+
+        .flower-trail-layer {
+          position: fixed;
+          inset: 0;
+          z-index: 11;
+          pointer-events: none;
+        }
+
+        .flower-trail {
+          position: fixed;
+          transform: translate(-50%, -50%);
+          font-size: 20px;
+          animation: flowerTrailFade 1s ease-out forwards;
+          filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+        }
+
+        @keyframes flowerTrailFade {
+          0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(0.7) rotate(0deg);
+          }
+          100% {
+            opacity: 0;
+            transform: translate(-50%, -95%) scale(1.5) rotate(60deg);
+          }
+        }
+
         .page {
           position: relative;
           z-index: 10;
@@ -627,6 +944,12 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           backdrop-filter: blur(12px);
           overflow-y: auto;
           animation: cardPop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .card::-webkit-scrollbar {
+          display: none;
         }
 
         @keyframes cardPop {
@@ -1288,10 +1611,11 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           animation-delay: 0.6s;
         }
 
-        .btn-found {
+        .btn-found,
+        .fairy-open-btn,
+        .fairy-back-btn {
           display: block;
           width: 100%;
-          background: linear-gradient(135deg, #ff5ba7, #e91e8c);
           color: #fff;
           border: none;
           border-radius: 50px;
@@ -1300,17 +1624,22 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           font-size: 21px;
           font-weight: 900;
           cursor: pointer;
-          box-shadow: 0 8px 26px rgba(233, 30, 140, 0.5);
           transition:
             transform 0.15s,
             box-shadow 0.15s;
-          animation: btnPulse 2s ease-in-out infinite;
           letter-spacing: 0.3px;
         }
 
-        .btn-found:hover {
+        .btn-found {
+          background: linear-gradient(135deg, #ff5ba7, #e91e8c);
+          box-shadow: 0 8px 26px rgba(233, 30, 140, 0.5);
+          animation: btnPulse 2s ease-in-out infinite;
+        }
+
+        .btn-found:hover,
+        .fairy-open-btn:hover,
+        .fairy-back-btn:hover {
           transform: scale(1.05);
-          box-shadow: 0 12px 32px rgba(233, 30, 140, 0.62);
         }
 
         @keyframes btnPulse {
@@ -1451,6 +1780,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           border-radius: 16px;
           padding: 12px 14px;
           box-shadow: 0 3px 10px rgba(255, 100, 160, 0.12);
+          cursor: pointer;
         }
 
         .sp-label-title {
@@ -1640,6 +1970,162 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           letter-spacing: 0.3px;
         }
 
+        .fairy-open-btn {
+          margin-top: 12px;
+          background: linear-gradient(135deg, #c471ed, #f64f9d);
+          box-shadow: 0 8px 24px rgba(180, 80, 220, 0.45);
+          animation: btnPulse 2s ease-in-out infinite;
+        }
+
+        .fairy-title {
+          text-align: center;
+          font-family: 'Dancing Script', cursive;
+          font-size: 31px;
+          font-weight: 900;
+          color: #9b1461;
+          margin-bottom: 16px;
+          text-shadow: 0 2px 12px rgba(255, 120, 190, 0.25);
+        }
+
+        .fairy-book {
+          width: 100%;
+          min-height: 360px;
+          perspective: 1000px;
+          cursor: pointer;
+        }
+
+        .fairy-page {
+          min-height: 360px;
+          padding: 38px 26px 30px;
+          border-radius: 26px;
+          background:
+            radial-gradient(circle at 18% 10%, rgba(255, 255, 255, 0.95), transparent 28%),
+            radial-gradient(circle at 85% 90%, rgba(255, 190, 220, 0.45), transparent 35%),
+            linear-gradient(145deg, #fffaf0 0%, #fff1dc 45%, #ffe2ef 100%);
+          border: 3px solid rgba(255, 190, 215, 0.92);
+          box-shadow:
+            inset 0 0 20px rgba(255, 180, 210, 0.35),
+            inset 0 0 0 2px rgba(255, 255, 255, 0.45),
+            0 18px 45px rgba(180, 60, 150, 0.28);
+          transform-origin: left center;
+          transition:
+            transform 0.45s ease,
+            opacity 0.25s ease;
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .fairy-page::before {
+          content: '';
+          position: absolute;
+          inset: 18px;
+          border: 2px dashed rgba(210, 120, 160, 0.35);
+          border-radius: 18px;
+          pointer-events: none;
+        }
+
+        .fairy-page::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 22px;
+          width: 2px;
+          background: linear-gradient(to bottom, transparent, rgba(180, 90, 130, 0.25), transparent);
+        }
+
+        .fairy-book.flipping .fairy-page {
+          animation: pageFlip 0.55s ease both;
+        }
+
+        @keyframes pageFlip {
+          0% {
+            transform: rotateY(0deg);
+            opacity: 1;
+          }
+          45% {
+            transform: rotateY(-75deg);
+            opacity: 0.45;
+          }
+          100% {
+            transform: rotateY(0deg);
+            opacity: 1;
+          }
+        }
+
+        .fairy-corner {
+          position: absolute;
+          font-size: 20px;
+          animation: floaterAnim 3s ease-in-out infinite;
+          filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+        }
+
+        .fairy-corner.top-left {
+          top: 22px;
+          left: 24px;
+        }
+
+        .fairy-corner.top-right {
+          top: 22px;
+          right: 24px;
+          animation-delay: 0.4s;
+        }
+
+        .fairy-corner.bottom-left {
+          bottom: 20px;
+          left: 24px;
+          animation-delay: 0.8s;
+        }
+
+        .fairy-corner.bottom-right {
+          bottom: 20px;
+          right: 24px;
+          animation-delay: 1.1s;
+        }
+
+        .fairy-chapter-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 18px;
+          font-weight: 800;
+          color: #9b1461;
+          text-align: center;
+          margin-bottom: 18px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .fairy-text {
+          font-family: 'Cormorant Garamond', serif;
+          white-space: pre-wrap;
+          text-align: center;
+          font-size: 19px;
+          line-height: 1.75;
+          color: #7a174d;
+          font-style: italic;
+          position: relative;
+          z-index: 2;
+          margin: 0 auto;
+        }
+
+        .fairy-hint {
+          text-align: center;
+          margin-top: 16px;
+          font-size: 14px;
+          font-weight: 900;
+          color: #9b1461;
+          animation: hintGlow 2.5s ease-in-out infinite;
+        }
+
+        .fairy-back-btn {
+          margin-top: 16px;
+          background: linear-gradient(135deg, #ff8cc6, #e91e8c);
+          box-shadow: 0 8px 24px rgba(233, 30, 140, 0.42);
+        }
+
         @keyframes hintGlow {
           0%,
           100% {
@@ -1652,6 +2138,43 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             text-shadow:
               0 0 8px rgba(255, 105, 180, 0.5),
               0 0 15px rgba(190, 120, 255, 0.4);
+          }
+        }
+
+        @media (max-width: 520px) {
+          .card {
+            max-width: 360px;
+            padding: 28px 20px 24px;
+          }
+
+          .photo-frame {
+            height: 220px;
+          }
+
+          .info-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .input-row {
+            flex-direction: column;
+          }
+
+          .butterfly-companion {
+            font-size: 32px;
+          }
+
+          .butterfly-message {
+            font-size: 12px;
+            max-width: 220px;
+          }
+
+          .fairy-book,
+          .fairy-page {
+            min-height: 340px;
+          }
+
+          .fairy-text {
+            font-size: 17px;
           }
         }
       `}</style>

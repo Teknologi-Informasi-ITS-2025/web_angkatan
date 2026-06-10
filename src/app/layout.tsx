@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Cinzel, Montserrat } from 'next/font/google'
 import localFont from 'next/font/local'
 
@@ -58,6 +58,11 @@ const ringerLuctor = localFont({
 })
 
 export const metadata: Metadata = defineMetadata()
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1
+}
 
 export default function RootLayout({
   children
