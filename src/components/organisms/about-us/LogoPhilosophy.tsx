@@ -100,16 +100,26 @@ const philosophyData = [
 ]
 
 const carouselSlides = [philosophyData[philosophyData.length - 1], ...philosophyData, philosophyData[0]]
+const firstRealSlideIndex = 1
+const lastRealSlideIndex = philosophyData.length
+const firstCloneSlideIndex = 0
+const lastCloneSlideIndex = philosophyData.length + 1
 
 const LogoPhilosophy = () => {
   const [slideIndex, setSlideIndex] = useState(1)
   const [isTransitioning, setIsTransitioning] = useState(true)
   const currentIndex = (slideIndex - 1 + philosophyData.length) % philosophyData.length
 
+  const normalizeSlideIndex = (index: number) => {
+    if (index < firstRealSlideIndex) return lastRealSlideIndex
+    if (index > lastRealSlideIndex) return firstRealSlideIndex
+    return index
+  }
+
   useEffect(() => {
     const intervalId = window.setInterval(() => {
       setIsTransitioning(true)
-      setSlideIndex((prev) => prev + 1)
+      setSlideIndex((prev) => normalizeSlideIndex(prev) + 1)
     }, AUTO_SLIDE_INTERVAL_MS)
 
     return () => window.clearInterval(intervalId)
@@ -117,21 +127,21 @@ const LogoPhilosophy = () => {
 
   const handlePrev = () => {
     setIsTransitioning(true)
-    setSlideIndex((prev) => prev - 1)
+    setSlideIndex((prev) => normalizeSlideIndex(prev) - 1)
   }
 
   const handleNext = () => {
     setIsTransitioning(true)
-    setSlideIndex((prev) => prev + 1)
+    setSlideIndex((prev) => normalizeSlideIndex(prev) + 1)
   }
 
   const handleTransitionEnd = () => {
-    if (slideIndex === 0) {
+    if (slideIndex <= firstCloneSlideIndex) {
       setIsTransitioning(false)
-      setSlideIndex(philosophyData.length)
-    } else if (slideIndex === philosophyData.length + 1) {
+      setSlideIndex(lastRealSlideIndex)
+    } else if (slideIndex >= lastCloneSlideIndex) {
       setIsTransitioning(false)
-      setSlideIndex(1)
+      setSlideIndex(firstRealSlideIndex)
     }
   }
 
