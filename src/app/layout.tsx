@@ -82,6 +82,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-title" content="Evastra" />
         <link rel="manifest" href="/assets/images/favicon/site.webmanifest" />
+        <meta name="google-site-verification" content="XHARGBwxUR8WOQ_W9gKlolETODcbDQHKbQZ1ajUBjzY" />
       </head>
       <body className="flex min-h-full flex-col font-sans">
         <Navbar />
