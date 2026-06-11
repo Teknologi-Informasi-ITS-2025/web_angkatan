@@ -52,7 +52,7 @@ const Navbar = () => {
         className="bg-blue-cs-40/85 fixed top-3 left-1/2 z-50 flex w-[calc(100%-1rem)] -translate-x-1/2 items-center justify-between gap-3 rounded-[16px] px-3 py-2.5 text-white backdrop-blur-xs sm:top-4 sm:w-[calc(100%-2rem)] sm:px-5 sm:py-3 lg:w-[calc(100%-3rem)] lg:px-8 lg:py-4"
         aria-label="Main navigation"
       >
-        <div className="flex shrink-0 items-center gap-2 md:hidden">
+        <Link href="/" aria-label="Go to homepage" className="flex shrink-0 items-center gap-2 md:hidden">
           <LogoIcon alt="Evastra - Teknologi Informasi ITS 2025" width={36} height={40} />
           <span
             className="font-rubikone text-blue-cs-30 relative mt-1 text-xl"
@@ -61,10 +61,10 @@ const Navbar = () => {
             EVASTRA
             <Star className="absolute top-1 -right-3.5" width={20} height={20} />
           </span>
-        </div>
-        <div className="hidden shrink-0 md:block">
+        </Link>
+        <Link href="/" aria-label="Go to homepage" className="hidden shrink-0 md:block">
           <LogoWithTextHorizontal alt="Evastra - Teknologi Informasi ITS 2025" width={168} height={28} />
-        </div>
+        </Link>
 
         <button
           type="button"
@@ -130,7 +130,9 @@ const Navbar = () => {
           aria-hidden={!isMenuOpen}
         >
           <div className="flex items-center justify-between">
-            <LogoWithTextHorizontal alt="Evastra - Teknologi Informasi ITS 2025" width={150} height={24} />
+            <Link href="/" aria-label="Go to homepage" onClick={() => setIsMenuOpen(false)}>
+              <LogoWithTextHorizontal alt="Evastra - Teknologi Informasi ITS 2025" width={150} height={24} />
+            </Link>
             <button
               type="button"
               className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-white/10"
