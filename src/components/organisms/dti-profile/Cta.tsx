@@ -4,12 +4,20 @@ import Image from 'next/image'
 
 import { getTextStrokeStyle } from '@/lib/textStroke'
 
-import Frame from '@/assets/images/dti-profile/ara7.jpg'
 import cloudIcon2 from '@/assets/images/dti-profile/awan3.svg'
+import CTA1 from '@/assets/images/dti-profile/cta1.jpeg'
+import CTA2 from '@/assets/images/dti-profile/cta2.png'
+import CTA3 from '@/assets/images/dti-profile/cta3.jpeg'
 import Bg from '@/assets/images/dti-profile/cta.png'
 import useWindowBreakpoint from '@/hooks/useWindowBreakpoint'
 
-const achievements = ['Juara 1 CTF', 'Juara 1 CTF', 'Juara 1 CTF']
+const achievements = [
+  'World Skill ASEAN National Selection 3rd Place',
+  'Hology 7.0 1st Runner Up',
+  'NETCOMP 3.0 2025 2nd Place'
+]
+
+const ctaImages = [CTA1, CTA2, CTA3]
 
 const Cta = () => {
   const breakpoint = useWindowBreakpoint()
@@ -68,7 +76,7 @@ const Cta = () => {
             <div className="relative w-full">
               <div className="relative aspect-[3/2] w-full overflow-hidden rounded-md">
                 <Image
-                  src={Frame}
+                  src={ctaImages[index]}
                   alt={`${achievement} thumbnail`}
                   fill
                   className="object-cover"
