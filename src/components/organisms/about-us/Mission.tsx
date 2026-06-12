@@ -14,7 +14,7 @@ const Mission = () => {
 
         <p>
           Memberikan wadah <span className="text-yellow-cs-20 font-bold">kolaborasi</span> dan{' '}
-          <span className="text-yellow-cs-20 font-bold">eksplorasi</span> untuk mengembangkan{' '}
+          <span className="text-yellow-cs-20 font-bold">eksplorasi</span> untuk menggali{' '}
           <span className="text-yellow-cs-20 font-bold">potensi setiap</span> individu sehingga mampu memberikan{' '}
           <span className="text-yellow-cs-20 font-bold">dampak positif</span>
         </p>

@@ -9,7 +9,7 @@ import Star from '@/components/atoms/icon/StarMember'
 import CloudAtas from '@/assets/images/members/cloud-atas.svg'
 import CloudBawah from '@/assets/images/members/cloud-bawah.svg'
 import CloudTengah from '@/assets/images/members/cloud-tengah.svg'
-import MemberBg from '@/assets/images/members/member-bg.png'
+import MemberBg from '@/assets/images/members/member-bg.webp'
 
 const CLOUD_GAP_VH = 300
 const EDGE_OFFSET_VH = 1
@@ -122,6 +122,10 @@ const MemberListShell = ({ children }: MemberListShellProps) => {
           backgroundPosition: 'top center',
           backgroundSize: '100% auto'
         }}
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(11,30,56,0.62)_0%,rgba(11,30,56,0.52)_22%,rgba(11,30,56,0.58)_100%)]"
         aria-hidden="true"
       />
       <div

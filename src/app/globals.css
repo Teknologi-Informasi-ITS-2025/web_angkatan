@@ -105,11 +105,13 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal,
   .scroll-reveal-ready,
-  .scroll-reveal-visible.scroll-reveal-ready {
+  .scroll-reveal-visible.scroll-reveal-ready,
+  .usage-variants-marquee-track {
     opacity: 1;
     transform: none;
     transition: none;
     will-change: auto;
+    animation: none;
   }
 }
 
@@ -181,6 +183,34 @@ body {
     transform: scale(0.9);
   }
 }
+
+@keyframes usage-variants-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.usage-variants-marquee-track {
+  animation: usage-variants-marquee 34s linear infinite;
+  will-change: transform;
+}
+
+@keyframes what-we-mean-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes member-086-backdrop-in {
   from {
     opacity: 0;
