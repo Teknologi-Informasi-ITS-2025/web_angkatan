@@ -20,9 +20,10 @@ const philosophyData = [
     image: LogoBintang,
     description: (
       <>
-        Perlambangan dari <span className="text-yellow-cs-30">Astra</span>, sebagai bentuk dari{' '}
-        harapan dan <span className="text-yellow-cs-30">tujuan</span>, serta
-        cita-cita bersama yang ingin kami capai.
+        Perlambangan dari <span className="text-yellow-cs-30">Astra</span>, sebagai bentuk dari harapan dan{' '}
+        <span className="text-yellow-cs-30">tujuan</span>. Mencapai cita-cita bersama untuk pada akhirnya menjadi{' '}
+        <span className="text-yellow-cs-30">bintang</span> yang <span className="text-yellow-cs-30">menerangi</span> dan{' '}
+        <span className="text-yellow-cs-30">membawa kebermanfaatan</span>.
       </>
     )
   },
@@ -34,7 +35,7 @@ const philosophyData = [
       <>
         Melambangkan proses <span className="text-yellow-cs-30">perkembangan karakter</span> dan{' '}
         <span className="text-yellow-cs-30">kompetensi</span> untuk mencapai{' '}
-        <span className="text-yellow-cs-30">bintang</span> <span className="text-yellow-cs-30">(tujuan)</span>
+        <span className="text-yellow-cs-30">bintang</span> <span className="text-yellow-cs-30">(tujuan)</span>.
       </>
     )
   },
@@ -46,7 +47,7 @@ const philosophyData = [
       <>
         Simbol dari <span className="text-yellow-cs-30">Titik Awal</span>, menggambarkan bahwa tiap individu memiliki{' '}
         <span className="text-yellow-cs-30">potensi</span> serta mimpi yang menjadi awal{' '}
-        <span className="text-yellow-cs-30">perjalanan</span>
+        <span className="text-yellow-cs-30">perjalanan</span>.
       </>
     )
   },
@@ -58,7 +59,7 @@ const philosophyData = [
       <>
         Bentuk menyerupai tangan yang merangkul menyimbolkan <span className="text-yellow-cs-30">kepedulian</span> dan{' '}
         <span className="text-yellow-cs-30">saling merangkul</span> untuk menciptakan lingkungan yang{' '}
-        <span className="text-yellow-cs-30">inklusif</span>
+        <span className="text-yellow-cs-30">inklusif</span>.
       </>
     )
   },
@@ -69,7 +70,8 @@ const philosophyData = [
     description: (
       <>
         Melambangkan <span className="text-yellow-cs-30">kolaborasi</span> antar Individu baik secara internal atau
-        eksternal dalam upaya <span className="text-yellow-cs-30">berkembang bersama</span>
+        eksternal dalam upaya <span className="text-yellow-cs-30">berkembang bersama</span> sehingga mencapai hasil
+        akhir potensi pengembangan diri yang berdampak bagi lingkungan sekitar.
       </>
     )
   },
@@ -80,7 +82,7 @@ const philosophyData = [
     description: (
       <>
         Bentuk menyerupai huruf <span className="text-yellow-cs-30">‘e’</span> yang menjadi simbol dari nama{' '}
-        <span className="text-yellow-cs-30">‘EVASTRA’</span>
+        <span className="text-yellow-cs-30">‘EVASTRA’</span>.
       </>
     )
   },
@@ -93,7 +95,7 @@ const philosophyData = [
         Melambangkan <span className="text-yellow-cs-30">keberagaman individu</span> yang{' '}
         <span className="text-yellow-cs-30">saling melengkapi</span> dalam satu tujuan bersama melalui proses
         perkembangan yang berjalan secara <span className="text-yellow-cs-30">bertahap</span>, dari mengenal diri,
-        belajar bersama, hingga mencapai <span className="text-yellow-cs-30">potensi terbaik</span>
+        belajar bersama, hingga mencapai <span className="text-yellow-cs-30">potensi terbaik</span>.
       </>
     )
   }

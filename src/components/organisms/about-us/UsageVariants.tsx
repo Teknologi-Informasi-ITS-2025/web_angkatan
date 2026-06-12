@@ -84,7 +84,7 @@ const usageVariantItems: UsageVariantItem[] = [
   }
 ]
 
-const monochromeFilter = 'grayscale(1) saturate(0) contrast(1.05) brightness(0.72)'
+const monochromeFilter = 'grayscale(1)'
 
 const UsageVariants = () => {
   return (
