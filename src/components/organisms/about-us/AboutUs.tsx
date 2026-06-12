@@ -28,15 +28,15 @@ const AboutUs = () => {
             </p>
 
             <p>
-              <span className="text-yellow-cs-20 font-bold">Astra:</span> bintang, harapan dan tujuan yang tinggi.
+              <span className="text-yellow-cs-20 font-bold">Astra:</span> bintang; harapan dan tujuan yang tinggi.
               Melambangkan arah serta cita-cita bersama yang menjadi motivasi untuk terus maju dan berkembang.
             </p>
 
             <p>
               <span className="text-yellow-cs-20 font-bold">EVASTRA</span> merupakan nama angkatan Teknologi Informasi
               ITS 2025 yang merepresentasikan semangat untuk{' '}
-              <span className="text-yellow-cs-20 font-bold">berkembang bersama</span>,{' '}
-              <span className="text-yellow-cs-20 font-bold">menguatkan karakter</span>, dan{' '}
+              <span className="text-yellow-cs-20 font-bold">berkembang bersama,</span>{' '}
+              <span className="text-yellow-cs-20 font-bold">menguatkan karakter,</span> dan{' '}
               <span className="text-yellow-cs-20 font-bold">meningkatkan kompetensi</span>.
             </p>
 
@@ -53,12 +53,14 @@ const AboutUs = () => {
             </p>
 
             <p>
-              Terinspirasi dari pepatah Latin klasik, &ldquo;
-              <span className="text-yellow-cs-20 font-bold">ad astra per aspera</span>&rdquo; yang berarti, &ldquo;
-              <span className="text-yellow-cs-20 font-bold">melalui rintangan, menuju bintang-bintang</span>
-              &rdquo;. Makna ini menggambarkan <span className="text-yellow-cs-20 font-bold">EVASTRA</span> yang
-              diharapkan menjadi angkatan yang mampu{' '}
-              <span className="text-yellow-cs-20 font-bold">menghadapi rintangan</span> dan{' '}
+              Terinspirasi dari pepatah Latin klasik,{' '}
+              <span className="text-yellow-cs-20 font-bold">&ldquo;ad astra per aspera&rdquo;</span> {' yang '} berarti,{' '}
+              <span className="text-yellow-cs-20 font-bold">
+                {' '}
+                &ldquo;melalui rintangan, menuju bintang-bintang&rdquo;
+              </span>
+              . Makna ini menggambarkan <span className="text-yellow-cs-20 font-bold">EVASTRA</span> yang diharapkan
+              menjadi angkatan yang mampu <span className="text-yellow-cs-20 font-bold">menghadapi rintangan</span> dan{' '}
               <span className="text-yellow-cs-20 font-bold">menggapai impiannya</span>.
             </p>
           </div>
