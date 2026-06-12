@@ -49,7 +49,7 @@ const Vision = () => {
           <Image src={Frame} alt="Frame" className="hidden h-auto w-full sm:block" priority />
 
           <div className="rounded-2xl border-2 border-white/70 bg-[#0D294F]/80 px-5 py-8 shadow-[0_16px_40px_rgba(0,0,0,0.24)] sm:absolute sm:inset-0 sm:flex sm:items-center sm:justify-center sm:rounded-none sm:border-0 sm:bg-transparent sm:px-10 sm:py-0 sm:shadow-none">
-            <p className="mx-auto max-w-3xl text-center text-sm leading-7 font-semibold text-white sm:text-base md:text-lg md:leading-relaxed">
+            <p className="mx-auto w-full max-w-3xl text-center text-sm leading-7 font-semibold text-white sm:text-base md:w-2/3 md:text-lg md:leading-relaxed lg:w-full">
               Menjadi pengelola program studi bidang teknologi informasi yang memiliki reputasi internasional serta
               berkontribusi pada keilmuan dan kemanusiaan.
             </p>
