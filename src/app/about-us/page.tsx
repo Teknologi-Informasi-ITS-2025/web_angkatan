@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import { defineMetadata, getMetadataBase } from '@/lib/metadata'
 
 import AboutUs from '@/components/organisms/about-us/AboutUs'
@@ -7,9 +5,11 @@ import ColorPallete from '@/components/organisms/about-us/ColorPallete'
 import Hero from '@/components/organisms/about-us/Hero'
 import LogoPhilosophy from '@/components/organisms/about-us/LogoPhilosophy'
 import Mission from '@/components/organisms/about-us/Mission'
+import UsageVariants from '@/components/organisms/about-us/UsageVariants'
 import Vision from '@/components/organisms/about-us/Vision'
+import WhatWeMean from '@/components/organisms/about-us/WhatWeMean'
 
-import aboutUsBg from '@/assets/images/about-us/about-us-bg.png'
+import memberBg from '@/assets/images/about-us/member-bg.svg'
 
 export const metadata = defineMetadata({
   title: 'Tentang Kami - Evastra',
@@ -47,18 +47,36 @@ export const metadata = defineMetadata({
 export default function AboutUsPage() {
   return (
     <main className="bg-blue-cs-40 relative z-0 flex min-h-screen w-full flex-col overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 -bottom-4 z-0 opacity-50">
-        <Image src={aboutUsBg} alt="About Us Background" fill priority className="object-cover object-top" />
-      </div>
+      <Hero />
+      <div className="relative z-0 flex flex-col">
+        <div
+          className="pointer-events-none absolute inset-0 z-0 bg-repeat-y opacity-75"
+          style={{
+            backgroundImage: `url(${memberBg.src})`,
+            backgroundPosition: 'top center',
+            backgroundSize: '100% auto'
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(11,30,56,0.62)_0%,rgba(11,30,56,0.52)_22%,rgba(11,30,56,0.58)_100%)]"
+          aria-hidden="true"
+        />
+        <div
+          className="from-blue-cs-40 pointer-events-none absolute top-0 left-0 z-5 h-28 w-full bg-gradient-to-b via-[#0B1E38]/94 to-transparent sm:h-40 lg:h-56"
+          aria-hidden="true"
+        />
 
-      <>
-        <Hero />
-        <AboutUs />
-        <LogoPhilosophy />
-        <ColorPallete />
-        <Vision />
-        <Mission />
-      </>
+        <div className="relative z-10">
+          <AboutUs />
+          <LogoPhilosophy />
+          <UsageVariants />
+          <ColorPallete />
+          <Vision />
+          <Mission />
+          <WhatWeMean />
+        </div>
+      </div>
     </main>
   )
 }

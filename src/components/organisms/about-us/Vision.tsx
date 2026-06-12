@@ -15,8 +15,7 @@ const Vision = () => {
         <span className="text-yellow-cs-20 font-bold">berkembang bersama</span> melalui{' '}
         <span className="text-yellow-cs-20 font-bold">kolaborasi</span> serta penguatan{' '}
         <span className="text-yellow-cs-20 font-bold">karakter</span> dan{' '}
-        <span className="text-yellow-cs-20 font-bold">kompetensi</span> guna memberikan{' '}
-        <span className="text-yellow-cs-20 font-bold">dampak positif</span>
+        <span className="text-yellow-cs-20 font-bold">kompetensi</span>
       </p>
 
       {/* Cloud & Star Decoration Positioned between Vision and Mission */}
